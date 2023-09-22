@@ -6,6 +6,8 @@ static const unsigned int gappx     = 4;	/* gaps between windows */
 static const unsigned int snap      = 4;        /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+#define ICONSIZE    20                          /* icon size */
+#define ICONSPACING 10                          /* space between icon and title */
 static const char *fonts[]          = { "Iosevka Nerd Font:size=12" };
 static const char dmenufont[]       = "Iosevka Nerd Font:size=12";
 static const char col_black[]       = "#101010";
