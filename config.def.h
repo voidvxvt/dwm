@@ -61,6 +61,15 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_black, "-nf", col_blue, "-sb", col_blue, "-sf", col_black, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
+/* PulseAudio */
+static const char *upvol[]   = { "pactl", "set-sink-volume", "0", "+10%",    NULL };
+static const char *downvol[] = { "pactl", "set-sink-volume", "0", "-10%",    NULL };
+static const char *mutevol[] = { "pactl", "set-sink-mute",   "0", "toggle",  NULL };
+static const char *mutemic[] = { "pactl", "set-source-mute", "0", "toggle",  NULL };
+
+#include "shiftact.c"
+#include <X11/XF86keysym.h>
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -68,10 +77,14 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_Left,   shiftview,      { .i = -1 } },
+	{ MODKEY|ShiftMask,             XK_Right,  shiftview,      { .i = +1 } },
+	{ MODKEY,                       XK_Left,   shiftmove,      { .i = -1 } },
+	{ MODKEY,                       XK_Right,  shiftmove,      { .i = +1 } },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
@@ -96,6 +109,12 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	/*Fn Keys*/
+	{ 0, XF86XK_AudioRaiseVolume,   spawn,                      {.v = upvol   } },
+	{ 0, XF86XK_AudioLowerVolume,   spawn,                      {.v = downvol } },
+	{ 0, XF86XK_AudioMute,          spawn,                      {.v = mutevol } },
+	{ 0, XF86XK_AudioMicMute,       spawn,                      {.v = mutemic } },
+	{ 0, XF86XK_Favorites,          spawn,                      SHCMD("alacritty -e lf") },
 };
 
 /* button definitions */
