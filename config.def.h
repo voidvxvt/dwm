@@ -6,13 +6,14 @@ static const unsigned int gappx     = 4;	/* gaps between windows */
 static const unsigned int snap      = 4;        /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-#define ICONSIZE    20                          /* icon size */
+#define ICONSIZE    18                          /* icon size */
 #define ICONSPACING 10                          /* space between icon and title */
-static const char *fonts[]          = { "Iosevka Nerd Font:size=12" };
-static const char dmenufont[]       = "Iosevka Nerd Font:size=12";
+static const char *fonts[]          = { "Iosevka Nerd Font:size=10" };
+static const char dmenufont[]       = "Iosevka Nerd Font:size=10";
 static const char col_black[]       = "#101010";
 static const char col_gruv_black[]  = "#161616";
-static const char col_blue[]        = "#017ff2";
+//static const char col_blue[]        = "#017ff2";
+static const char col_blue[]        = "#ccbf9c";
 //static const char col_urgborder[]   = "#9fef00";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
